@@ -72,3 +72,15 @@ Vue به صورت خودکار این کلاس‌ها را در مراحل مخ�
 
 
 
+مثال :
+```html
+<transition enter-active-class="animate__animated animate__bounceIn">
+  <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+</transition>
+```
+```html
+<transition-group name="list" enter-active-class="animate__animated animate__bounceInRight">
+  <li v-for="(data,index) in Skills" :key="index">{{ data.skill}}</li>
+</transition-group>
+```
+
