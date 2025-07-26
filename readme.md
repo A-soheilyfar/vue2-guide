@@ -1,4 +1,4 @@
-## Vue 2 Router 🚧
+# Vue 2 Router 🚧
 برای Vue 2 حتماً از Vue Router نسخه 3 استفاده کنید
 - `<router-view>` جایی است که کامپوننت‌های مختلف نمایش داده می‌شوند
 - `<router-link>` برای ایجاد لینک‌های navigation استفاده می‌شود
@@ -52,7 +52,201 @@ new Vue({
 ```
 ### 3. اضافه کردن router-view در App.vue
 
-## animation in Vue2 
+```javascript
+
+<template>
+  <div id="app">
+    <nav>
+      <router-link to="/">خانه</router-link>
+      <router-link to="/about">درباره ما</router-link>
+    </nav>
+    <router-view/>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App'
+}
+</script>
+
+<style>
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style><template>
+  <div id="app">
+    <nav>
+      <router-link to="/">خانه</router-link>
+      <router-link to="/about">درباره ما</router-link>
+    </nav>
+    <router-view/>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App'
+}
+</script>
+
+<style>
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
+
+```
+
+## انواع Route ها
+- Route های ساده
+```javascript
+const routes = [
+  { path: '/', component: Home },
+  { path: '/users', component: Users },
+  { path: '/contact', component: Contact }
+]
+```
+- Route های پارامتری (Dynamic Routes)
+```javascript
+const routes = [
+  // پارامتر :id
+  { path: '/user/:id', component: User },
+  
+  // چند پارامتر
+  { path: '/user/:id/post/:postId', component: UserPost },
+  
+  // پارامتر اختیاری
+  { path: '/user/:id?', component: User }
+]
+```
+
+دسترسی به پارامترها در کامپوننت:
+```vue
+<template>
+  <div>
+    <h1>User ID: {{ $route.params.id }}</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'User',
+  created() {
+    console.log('User ID:', this.$route.params.id)
+  },
+  watch: {
+    '$route'(to, from) {
+      // واکنش به تغییر route
+      console.log('Route changed from', from.path, 'to', to.path)
+    }
+  }
+}
+</script>
+```
+### Nested Routes (Route های تو در تو)
+```javascript
+const routes = [
+  {
+    path: '/user/:id',
+    component: User,
+    children: [
+      // /user/:id/profile
+      { path: 'profile', component: UserProfile },
+      
+      // /user/:id/posts
+      { path: 'posts', component: UserPosts },
+      
+      // route خالی یعنی /user/:id
+      { path: '', component: UserHome }
+    ]
+  }
+]
+```
+کامپوننت والد باید `<router-view>` داشته باشد:
+
+```vue
+<template>
+  <div class="user">
+    <h2>User {{ $route.params.id }}</h2>
+    <router-view></router-view>
+  </div>
+</template>
+```
+
+## Navigation (جابجایی)
+- استفاده از router-link
+```vue
+<template>
+  <div>
+    <!-- لینک ساده -->
+    <router-link to="/users">کاربران</router-link>
+    
+    <!-- لینک با پارامتر -->
+    <router-link :to="`/user/${userId}`">پروفایل کاربر</router-link>
+    
+    <!-- لینک با object -->
+    <router-link :to="{ name: 'User', params: { id: userId }}">
+      پروفایل کاربر
+    </router-link>
+    
+    <!-- لینک با query parameters -->
+    <router-link :to="{ path: '/users', query: { page: 2 }}">
+      صفحه 2 کاربران
+    </router-link>
+  </div>
+</template>
+```
+- Navigation برنامه‌ای (Programmatic Navigation)
+```javascript
+// در methods کامپوننت
+methods: {
+  goToUser(userId) {
+    // با path
+    this.$router.push(`/user/${userId}`)
+    
+    // با object
+    this.$router.push({ name: 'User', params: { id: userId }})
+    
+    // با query
+    this.$router.push({ path: '/users', query: { page: 2 }})
+  },
+  
+  goBack() {
+    this.$router.go(-1)
+  },
+  
+  replaceRoute() {
+    // جایگزین کردن به جای اضافه کردن به history
+    this.$router.replace('/new-page')
+  }
+}
+```
+
+
+# animation in Vue2 
 
 این رفتار مربوط به سیستم Transition Classes در Vue.js است. وقتی شما از `<transition>` با نام مشخص استفاده می‌کنید، Vue به صورت خودکار کلاس‌های CSS مخصوص انیمیشن را اضافه و حذف می‌کند.
 چگونگی کار Transition Classes در Vue:
