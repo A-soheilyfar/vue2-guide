@@ -1,3 +1,57 @@
+## Vue 2 Router 🚧
+برای Vue 2 حتماً از Vue Router نسخه 3 استفاده کنید
+- `<router-view>` جایی است که کامپوننت‌های مختلف نمایش داده می‌شوند
+- `<router-link>` برای ایجاد لینک‌های navigation استفاده می‌شود
+- Route Guards برای کنترل دسترسی و احراز هویت بسیار مفیدند
+
+### 1. ایجاد فایل router
+ابتدا فایل router/index.js ایجاد کنید:
+```javascript
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '@/views/Home.vue'
+import About from '@/views/About.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
+  }
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router
+
+```
+
+### 2. تنظیم در main.js
+```javascript
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+
+Vue.config.productionTip = false
+
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount('#app')
+```
+### 3. اضافه کردن router-view در App.vue
+
 ## animation in Vue2 
 
 این رفتار مربوط به سیستم Transition Classes در Vue.js است. وقتی شما از `<transition>` با نام مشخص استفاده می‌کنید، Vue به صورت خودکار کلاس‌های CSS مخصوص انیمیشن را اضافه و حذف می‌کند.
