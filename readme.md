@@ -64,7 +64,23 @@ yarn serve
 پروژه روی http://localhost:8080 اجرا می‌شه.
 
 
-برای تغییر پورت اچرایی 
+برای تغییر پورت اچرایی در فایل vue.config.js این کد ها رو قرار بدید
+```javascript
+const { defineConfig } = require('@vue/cli-service');
+
+module.exports = defineConfig({
+  transpileDependencies: true,
+
+  devServer: {
+    // شماره پورت را اینجا مشخص کنید
+    port: 3100, 
+    client: {
+      // این آدرس را هم مطابق با پورت جدید آپدیت کنید
+      webSocketURL: 'ws://localhost:3100/ws', 
+    },
+  },
+});
+```
 
 # Vue 2 Router 🚧
 برای Vue 2 حتماً از Vue Router نسخه 3 استفاده کنید
