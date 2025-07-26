@@ -26,7 +26,8 @@ vue create my-vue2-project
 یا Manual Configuration:
 اگر Manually select features رو انتخاب کنی:
 
-‍‍‍```bash
+```bash
+
 ? Check the features needed for your project:
  ◉ Choose Vue version
  ◉ Babel
@@ -37,7 +38,9 @@ vue create my-vue2-project
  ◉ CSS Pre-processors
  ◉ Linter / Formatter
  ◯ Unit Testing
- ◯ E2E Testing```
+ ◯ E2E Testing
+
+```
 
 بعد:
 
