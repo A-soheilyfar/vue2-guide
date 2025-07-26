@@ -22,8 +22,49 @@ vue create my-vue2-project
 ```
 
 اگر میخواین router رو هم در همین مرحله اضافه کنید از گزینه manual برید جلو
+گزینه ۱ رو انتخاب کن
+یا Manual Configuration:
+اگر Manually select features رو انتخاب کنی:
+
+‍‍‍```bash
+? Check the features needed for your project:
+ ◉ Choose Vue version
+ ◉ Babel
+ ◯ TypeScript
+ ◯ Progressive Web App (PWA) Support
+ ◉ Router
+ ◯ Vuex
+ ◉ CSS Pre-processors
+ ◉ Linter / Formatter
+ ◯ Unit Testing
+ ◯ E2E Testing```
+
+بعد:
+
+Vue version: 2.x رو انتخاب کن
+Router: اگه می‌خوای routing داشته باشی
+CSS Pre-processor: Sass/SCSS توصیه می‌شه
+Linter: ESLint + Prettier
+
+2 - استفاده از Vite (سریع‌تر)
+```bash
+npm create vue@2 my-vue2-project
+# یا
+yarn create vue@2 my-vue2-project
+```
+
+4. شروع Development Server
+
+```bash
+cd my-vue2-project
+npm run serve
+# یا
+yarn serve
+```
+پروژه روی http://localhost:8080 اجرا می‌شه.
 
 
+برای تغییر پورت اچرایی 
 
 # Vue 2 Router 🚧
 برای Vue 2 حتماً از Vue Router نسخه 3 استفاده کنید
